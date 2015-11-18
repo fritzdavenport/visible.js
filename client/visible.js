@@ -60,10 +60,10 @@ Element.prototype.isVisible = function() {
 };
 
 function sendData(){
-	var request = new XMLHttpRequest();
-	request.open('POST', '/my/url', true);
-	request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-	request.send(data);
+    var request = new XMLHttpRequest();
+    request.open('POST', '/my/url', true);
+    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+    request.send(data);
 }
 
 function lowest(x,y){
@@ -76,6 +76,9 @@ function greatest(x,y){
 
 var initialDelayMs = 500
 var intervalMs = 200
+var seenMs = 3000
+var seenAmt = .3
+var seenIntervals = (seenMs) / intervalMs
 
 window.setTimeout(function(){
     window.setInterval((function(){
@@ -131,10 +134,13 @@ window.setTimeout(function(){
             diff.height = (diff.b.l.y - diff.t.l.y) > 0 ? (diff.b.l.y - diff.t.l.y) : 0
             diff.area = diff.height *  diff.width
 
+            if ( adE.isVisible(ad) && ((diff.area / ad.area)>seenAmt ) && seenIntervals>0) --seenIntervals
+
             out.innerHTML = JSON.stringify({
                 v: adE.isVisible(ad),
                 // diff: diff,
-                percVis: (diff.area / ad.area)*100
+                percVis: (diff.area / ad.area)*100,
+                seen: !(seenIntervals)
             }, null, "\t")
             out2.innerHTML = JSON.stringify({
                 // ad: ad,
