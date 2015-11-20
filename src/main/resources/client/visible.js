@@ -137,17 +137,15 @@ window.setTimeout(function(){
             if ( adE.isVisible(ad) && ((diff.area / ad.area)>seenAmt ) && seenIntervals>0) --seenIntervals
 
             out.innerHTML = JSON.stringify({
-                v: adE.isVisible(ad),
-                // diff: diff,
+                isBlocked: adE.isVisible(ad) ? "not blocked" : "possibly", 
                 percVis: (diff.area / ad.area)*100,
                 seen: !(seenIntervals)
             }, null, "\t")
-            out2.innerHTML = JSON.stringify({
+
+            // out2.innerHTML = JSON.stringify({
                 // ad: ad,
                 // view: view
-            }, null, "\t")
-
-            // console.log(vis);
+            // }, null, "\t")
         } else console.log('null');
     }), intervalMs)
 }, initialDelayMs)

@@ -1,0 +1,48 @@
+
+#header h1 a { 
+	display: block; 
+	width: 300px; 
+	height: 80px; 
+}
+
+#supawide {
+	/*width: 3000px;*/
+}
+
+article { 
+	width: 70%;
+}
+
+body {
+	padding: 50px 20px;
+}
+
+.ad {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+}
+
+.offscreen {
+    right: -2000px;
+}
+
+.hidden {
+    display: none;
+}
+
+#out {
+	position: fixed;
+	top: 0;
+	background-color: white;
+	font-size:10px;
+}
+
+#out2 {
+	position: fixed;
+	top: 0;
+	left: 35%;
+	background-color: white;
+	font-size:10px;
+}
