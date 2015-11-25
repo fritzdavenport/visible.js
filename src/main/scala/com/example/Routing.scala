@@ -11,7 +11,7 @@ class RoutingActor extends Actor with StaticRoute {
 
 trait StaticRoute extends HttpService {
   val staticRoute = {
-    path("") {
+    path("visible") {
       getFromResource("client/normal.html")
     } ~ {
       getFromResourceDirectory("client")
