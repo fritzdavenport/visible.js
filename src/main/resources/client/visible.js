@@ -1,4 +1,3 @@
-
 Element.prototype.isVisible = function() {
     'use strict';
     /**
@@ -9,16 +8,6 @@ Element.prototype.isVisible = function() {
      * Package URL: https://github.com/UseAllFive/true-visibility
      * Checks if a DOM element is visible. Takes into
      * consideration its parents and overflow.
-     * @param (el)      the DOM element to check if is visible
-     * These params are optional that are sent in recursively,
-     * you typically won't use these:
-     *
-     * @param (t)       Top corner position number
-     * @param (r)       Right corner position number
-     * @param (b)       Bottom corner position number
-     * @param (l)       Left corner position number
-     * @param (w)       Element width number
-     * @param (h)       Element height number
      */
     function _isVisible(el, t, r, b, l, w, h) {
         var p = el.parentNode, VISIBLE_PADDING = 2;
@@ -66,28 +55,20 @@ function sendData(){
     request.send(data);
 }
 
-function lowest(x,y){
-    return (x>y)?y:x;
-}
-
-function greatest(x,y){
-    return (x>y)?x:y;
-}
+function lowest(x,y){ return (x>y)?y:x }
+function greatest(x,y){ return (x>y)?x:y }
 
 var initialDelayMs = 500
 var intervalMs = 200
 var seenMs = 3000
-var seenAmt = .3
+var seenAmt = 0.3
 var seenIntervals = (seenMs) / intervalMs
 
 window.setTimeout(function(){
     window.setInterval((function(){
         var out = document.getElementById("out")
-        var out2 = document.getElementById("out2")
-
-        var diffE = document.getElementById("diff")
-
         var adE = document.getElementById("ad")
+
         if (adE != null){
             var wH = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight; 
             var wW = "innerWidth" in window ? window.innerWidth : document.documentElement.offsetWidth; 
@@ -120,8 +101,6 @@ window.setTimeout(function(){
                     r:{x: lowest(ad.b.r.x, view.b.r.x), y: lowest(ad.b.r.y, view.b.r.y) }
                 } 
             }
-
-             // ad.offsetWidth, adstyle.height.slice(0, adstyle.height.length-2)
             ad.width = (ad.t.r.x - ad.t.l.x)
             ad.height =  (ad.b.l.y - ad.t.l.y)
             ad.area = ad.height *  ad.width // we could also access the height from element style but.... meh
@@ -137,16 +116,10 @@ window.setTimeout(function(){
             if ( adE.isVisible(ad) && ((diff.area / ad.area)>seenAmt ) && seenIntervals>0) --seenIntervals
 
             out.innerHTML = JSON.stringify({
-                isBlocked: adE.isVisible(ad) ? "not blocked" : "possibly", 
+                isBlocked: adE.isVisible(ad) ? "not blocked" : "possibly blocked", 
                 percVis: (diff.area / ad.area)*100,
                 seen: !(seenIntervals)
             }, null, "\t")
-
-            // out2.innerHTML = JSON.stringify({
-                // ad: ad,
-                // view: view
-            // }, null, "\t")
         } else console.log('null');
     }), intervalMs)
 }, initialDelayMs)
-
